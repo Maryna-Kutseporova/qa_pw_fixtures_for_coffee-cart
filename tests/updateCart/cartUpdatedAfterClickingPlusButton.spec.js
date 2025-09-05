@@ -19,7 +19,9 @@ test('Assert cart updated correctly after clicking plus for drinks', async ({
 
   await cartPage.clickAddOneEspressoButton();
 
-  await cartPage.assertEspressoTotalCostContainsCorrectText(priceFormatStr(20));
+  await cartPage.assertEspressoTotalCostContainsCorrectText(
+    priceFormatStr(COFFEE_PRICES.espresso * 2),
+  );
   await cartPage.assertCappuccinoTotalCostContainsCorrectText(
     priceFormatStr(COFFEE_PRICES.cappuccino),
   );
@@ -27,9 +29,13 @@ test('Assert cart updated correctly after clicking plus for drinks', async ({
   await cartPage.clickAddOneCappuccinoButton();
 
   await cartPage.assertCappuccinoTotalCostContainsCorrectText(
-    priceFormatStr(38),
+    priceFormatStr(COFFEE_PRICES.cappuccino * 2),
   );
-  await cartPage.assertEspressoTotalCostContainsCorrectText(priceFormatStr(20));
+  await cartPage.assertEspressoTotalCostContainsCorrectText(
+    priceFormatStr(COFFEE_PRICES.espresso * 2),
+  );
 
-  await cartPage.assertTotalCheckoutContainsValue(priceFormatStr(58));
+  await cartPage.assertTotalCheckoutContainsValue(
+    priceFormatStr(COFFEE_PRICES.espresso * 2 + COFFEE_PRICES.cappuccino * 2),
+  );
 });
